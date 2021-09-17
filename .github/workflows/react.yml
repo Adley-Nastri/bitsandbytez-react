@@ -42,7 +42,7 @@ jobs:
         BAB_MYSQL_DB: ${{secrets.BAB_MYSQL_DB}}
         BAB_MYSQL_USER: ${{secrets.BAB_MYSQL_USER}}
         BAB_MYSQL_PASSWORD: ${{secrets.BAB_MYSQL_PASSWORD}}
-      run: mkdir build/API && touch build/API/DB-CONST.php && echo "<?php define('BAB_MYSQL_PASSWORD',getenv('BAB_MYSQL_PASSWORD')); define('BAB_MYSQL_DB',getenv('BAB_MYSQL_DB')); define('BAB_MYSQL_USER',getenv('BAB_MYSQL_USER'));?>" > build/API/DB-CONST.php
+      run: mkdir build/API && touch build/API/DB-CONST.php && echo "<?php define('BAB_MYSQL_PASSWORD', "\'"${BAB_MYSQL_PASSWORD}"\'"); define('BAB_MYSQL_USER', "\'"${BAB_MYSQL_USER}"\'"); define('BAB_MYSQL_DB', "\'"${BAB_MYSQL_DB}"\'"); ?>" > build/API/DB-CONST.php
 
     - name: Upload from public_html/react via FTP
       uses: airvzxf/ftp-deployment-action@latest
